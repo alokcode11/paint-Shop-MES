@@ -1,0 +1,7 @@
+path: ./
+train: images/train
+val: images/val
+test: images/test
+
+nc: 6
+names: ['front_panel', 'top_cover', 'base_panel', 'rh_stand', 'lh_stand', 'valve_plate']
