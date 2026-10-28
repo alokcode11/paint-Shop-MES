@@ -16,7 +16,7 @@ TARGET_COUNT = 3000
 step = max(int(total_frames / TARGET_COUNT), 1)
 
 print(f"Master Video Loaded: {total_frames} total frames ({total_frames/fps:.1f}s)")
-print(f"Sampling Step: Har {step} frames par 1 frame capture hoga (Target: {TARGET_COUNT} frames)...\n")
+print(f"Sampling Step: Capturing 1 frame every {step} frames (Target: {TARGET_COUNT} frames)...\n")
 
 current_frame = 0
 extracted_count = 0
