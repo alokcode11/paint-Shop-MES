@@ -5,14 +5,15 @@ import sys
 import os
 from ultralytics import YOLO
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # 1. Load Trained Model
-MODEL_PATH = r"D:\Desktop\paint-Shop-MES\ai-model\weights\best.pt"
+MODEL_PATH = os.path.join(BASE_DIR, "ai-model", "weights", "best.pt")
 print(f"Loading YOLO Model from: {MODEL_PATH}")
 model = YOLO(MODEL_PATH)
 print(f"Model classes: {model.names}")
 
 # 2. Video Source Configuration
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 VIDEOS_DIR = os.path.join(BASE_DIR, "videos")
 
 CONVEYOR_19MIN = os.path.join(VIDEOS_DIR, "master_conveyor_20inch_merged.mp4")
