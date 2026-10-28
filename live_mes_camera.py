@@ -27,7 +27,10 @@ os.environ["OPENCV_FFMPEG_CAPTURE_OPTIONS"] = "rtsp_transport;tcp"
 PRAMA_RTSP = "rtsp://admin:Alok2611@192.168.1.64:554/Streaming/Channels/102"
 PRAMA_RTSP_MAIN = "rtsp://admin:Alok2611@192.168.1.64:554/Streaming/Channels/101"
 
-if len(sys.argv) > 1 and (sys.argv[1].startswith("http") or sys.argv[1].startswith("rtsp")):
+if len(sys.argv) > 1 and sys.argv[1].isdigit():
+    CAMERA_SOURCE = int(sys.argv[1])
+    print(f"Loading Local Camera Index: {CAMERA_SOURCE}")
+elif len(sys.argv) > 1 and (sys.argv[1].startswith("http") or sys.argv[1].startswith("rtsp")):
     CAMERA_SOURCE = sys.argv[1]
     print(f"Loading Live Stream: {CAMERA_SOURCE}")
 elif len(sys.argv) > 1 and "prama_main" in sys.argv[1].lower():
@@ -42,9 +45,12 @@ elif len(sys.argv) > 1 and "phone" in sys.argv[1].lower():
 elif len(sys.argv) > 1 and "showcase" in sys.argv[1].lower():
     CAMERA_SOURCE = MASTER_SHOWCASE
     print(f"Loading Showcase Video: {MASTER_SHOWCASE}")
-else:
+elif os.path.exists(CONVEYOR_19MIN):
     CAMERA_SOURCE = CONVEYOR_19MIN
     print(f"Loading 19-Minute Original Conveyor Video: {CONVEYOR_19MIN}")
+else:
+    CAMERA_SOURCE = 0
+    print("No offline conveyor video found. Defaulting to local webcam (Camera 0)...")
 
 cap = cv2.VideoCapture(CAMERA_SOURCE, cv2.CAP_FFMPEG)
 if not cap.isOpened() and isinstance(CAMERA_SOURCE, str) and "102" in CAMERA_SOURCE:
